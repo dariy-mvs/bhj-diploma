@@ -3,23 +3,23 @@
  * Имеет свойство URL, равно пустой строке.
  * */
 class Entity {
-  constructor(URL = '') {
-    this.URL = URL
-  }
+
+  static URL = ''
   /**
    * Запрашивает с сервера список данных.
    * Это могут быть счета или доходы/расходы
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static list(data, callback){
+  static list(data, callback = f => f){
     const options = {
       url: this.URL,
       data: data,
       responseType: 'json',
       method: 'GET',
-      callback: callback
+      callback
+      
     };
-    createRequest(options);
+    return createRequest(options);
   }
 
   /**
@@ -27,29 +27,33 @@ class Entity {
    * на сервер. (в зависимости от того,
    * что наследуется от Entity)
    * */
-  static create(data, callback) {
+  static create(data, callback = f => f) {
+    console.log(this.URL);
     const options = {
       url: this.URL,
       data: data,
       responseType: 'json',
       method: 'PUT',
-      callback: callback
-    };
-    createRequest(options);
-  }
+      callback
+      }
+      return createRequest(options);
+    }
+    
 
   /**
    * Удаляет информацию о счёте или доходе/расходе
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static remove(data, callback ) {
+  static remove(data, callback = f => f) {
     const options = {
       url: this.URL,
       data: data,
       responseType: 'json',
       method: 'DELETE',
-      callback: callback
+      callback
+      }
+      return createRequest(options);
     };
-    createRequest(options);
+    
   }
-}
+

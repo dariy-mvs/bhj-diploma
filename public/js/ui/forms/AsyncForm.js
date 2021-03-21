@@ -39,11 +39,11 @@ class AsyncForm {
    * */
   getData() {
     let thisFormData = new FormData(this.element);
-    console.log(thisFormData.getAll('email'));
     let objectThisFormData = {};
     for (let [key, value] of thisFormData.entries()) {
       objectThisFormData[key] = value;
     };
+    console.log(objectThisFormData);
     return objectThisFormData;
   }
 

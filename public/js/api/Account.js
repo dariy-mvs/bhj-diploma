@@ -8,13 +8,13 @@ class Account extends Entity {
     super(URL);
     this.URL = '/account'
   }
-  static get(id = '', callback){
+  static get(id = '', callback = f => f){
     const options = {
       url: this.URL + `/${id}`,
       responseType: 'json',
       method: 'GET', 
-      callback: callback
+      callback
     };
-    createRequest(options);
+    return createRequest(options);
   }
 }

@@ -50,11 +50,12 @@ class Sidebar {
     });
 
     document.querySelector('.menu-item_logout').addEventListener('click', () => {
-      User.logout(User.fetch((data) => console.log(data)), (response) => {
+
+      User.logout(User.fetch((response) => {
         if (response.success) {
           App.setState( 'init' )
         }
-      });
+      }));
       
     })
   }
