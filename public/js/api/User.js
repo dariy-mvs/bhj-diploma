@@ -9,9 +9,6 @@ class User {
    * локальном хранилище.
    * */
 
-  constructor() {
-
-  }
 
   static URL = '/user';
 

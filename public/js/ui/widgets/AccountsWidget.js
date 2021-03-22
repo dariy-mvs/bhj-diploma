@@ -58,7 +58,7 @@ class AccountsWidget {
         console.log(response);
         if (response.success) {
           this.clear();
-          [...response.data].forEach(el => el.renderItem(data))
+          response.data.forEach(el => this.renderItem(el))
         }
       })
 
@@ -112,6 +112,6 @@ class AccountsWidget {
    * */
   renderItem(data){
     let accountHTML = this.getAccountHTML(data);
-    this.element.insertAdjacentElement('beforeEnd', accountHTML);
+    this.element.insertAdjacentHTML('beforeEnd', accountHTML);
   }
 }
