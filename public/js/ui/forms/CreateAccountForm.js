@@ -12,12 +12,11 @@ class CreateAccountForm extends AsyncForm {
   onSubmit(data) {
     Account.create(data, (response, err) => {
       if (response && response.success) {
-        let thisModal = App.getModal('createAccount');
+        let thisModal = App.getModal("createAccount");
         thisModal.close();
         App.update();
-        thisModal.element.querySelector('.form').reset();
-      } else throw response.error
+        thisModal.element.querySelector(".form").reset();
+      } else throw response.error;
     });
-
   }
 }

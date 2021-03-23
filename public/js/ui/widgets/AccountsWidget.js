@@ -82,12 +82,15 @@ class AccountsWidget {
    * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
    * */
   onSelectAccount( element ) {
+    
+    //console.log(element);
     let accountsPanel = document.querySelector('.accounts-panel');
     if (accountsPanel.querySelector('.active')) {
       accountsPanel.querySelector('.active').classList.remove('active')
-    };
-    element.classList.add('active');
-    //App.showPage( 'transactions', { account_id: id_счёта })
+    }
+    element.closest('li').classList.add('active');
+    
+    App.showPage( 'transactions', {account_id: element.dataset.id})
   }
 
   /**
@@ -96,7 +99,7 @@ class AccountsWidget {
    * item - объект с данными о счёте
    * */
   getAccountHTML(item){
-    return `<li class="active account" data-id="${item.id}">
+    return `<li class="account" data-id="${item.id}">
     <a href="#">
         <span>${item.name}</span> /
         <span>${item.sum} ₽</span>
