@@ -14,7 +14,8 @@ class Modal {
   constructor(element) {
     if (!element) throw new Error("Пустой элемент");
     else {
-      (this.element = element), this.registerEvents();
+      this.element = element, 
+      this.registerEvents();
     }
   }
 

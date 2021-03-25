@@ -20,16 +20,8 @@ class Sidebar {
   //работает
   static initToggleButton() {
     document.querySelector(".sidebar-toggle").addEventListener("click", () => {
-      if (
-        document.body.classList.contains("sidebar-open") ||
-        document.body.classList.contains("sidebar-collapse")
-      ) {
-        document.body.classList.remove("sidebar-open");
-        document.body.classList.remove("sidebar-collapse");
-      } else {
-        document.body.classList.add("sidebar-open");
-        document.body.classList.add("sidebar-collapse");
-      }
+        document.body.classList.toggle("sidebar-open");
+        document.body.classList.toggle("sidebar-collapse");
     });
   }
 
@@ -53,16 +45,12 @@ class Sidebar {
       thisModal.open();
     });
 
-    document
-      .querySelector(".menu-item_logout")
-      .addEventListener("click", () => {
-        User.logout(
-          User.fetch((response) => {
+    document.querySelector(".menu-item_logout").addEventListener("click", () => {
+        User.logout(null, (response) => {
             if (response.success) {
               App.setState("init");
             }
-          })
-        );
+          });
       });
   }
 }

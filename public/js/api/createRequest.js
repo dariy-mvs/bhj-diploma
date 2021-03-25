@@ -8,44 +8,41 @@ const createRequest = (options = {}) => {
   xhr.responseType = options.responseType;
   const url = options.url;
   options.withCredentials = true;
+  let argumentForOpen;
+  let formData;
+  let methodIsGet = false;
 
   if (method !== "GET") {
-    let formData = new FormData();
+    argumentForOpen = url;
+    formData = new FormData();
     for (let key in options.data) {
       formData.append(key, options.data[key]);
     }
-    try {
-      xhr.open(method, url);
-      xhr.send(formData);
-      xhr.addEventListener("load", (response, err) => {
-        options.callback(
-          response.currentTarget.response,
-          response.currentTarget.response.error
-        );
-      });
-    } catch (e) {
-      xhr.addEventListener("load", (e) => {
-        options.callback(e);
-      });
-    }
   } else {
-    try {
-      let stringForRequest = "";
-      stringForRequest = options.url + "?";
-      for (let key in options.data) {
-        stringForRequest =
-          stringForRequest + key + "=" + options.data[key] + "&";
-      }
-      stringForRequest = stringForRequest.slice(0, -1);
-      xhr.open(method, stringForRequest);
-      xhr.send();
-      xhr.addEventListener("load", (response, err) => {
-        options.callback(response.currentTarget.response, err);
-      });
-    } catch (e) {
-      xhr.addEventListener("load", (err) => {
-        options.callback(err);
-      });
+    methodIsGet = true;
+    argumentForOpen = "";
+    argumentForOpen = options.url + "?";
+    for (let key in options.data) {
+      argumentForOpen = argumentForOpen + key + "=" + options.data[key] + "&";
     }
+    argumentForOpen = argumentForOpen.slice(0, -1);
   }
+
+  try {
+    xhr.open(method, argumentForOpen);
+    if (methodIsGet) {
+      xhr.send();
+    } else {
+      xhr.send(formData);
+    }
+  } catch (err) {
+    throw err;
+  }
+
+  xhr.addEventListener("load", (response, err) => {
+    options.callback(
+      response.currentTarget.response,
+      new Error(response.currentTarget.response.error)
+    );
+  });
 };

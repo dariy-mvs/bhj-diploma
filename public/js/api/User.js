@@ -12,8 +12,7 @@ class User {
   static URL = "/user";
 
   static setCurrent(user) {
-    const thisUser = JSON.stringify(user);
-    localStorage.setItem("user", thisUser);
+    return localStorage.setItem("user", JSON.stringify(user));
   }
 
   /**

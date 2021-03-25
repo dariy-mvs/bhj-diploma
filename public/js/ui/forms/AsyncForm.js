@@ -14,7 +14,8 @@ class AsyncForm {
    * */
   constructor(element) {
     if (!element) throw new Error("Передан пустой элемент!");
-    (this.element = element), this.registerEvents();
+    this.element = element, 
+    this.registerEvents();
   }
 
   /**

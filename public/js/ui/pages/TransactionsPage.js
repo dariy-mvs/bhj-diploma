@@ -14,7 +14,8 @@ class TransactionsPage {
     if (!element) {
       throw Error("Передан пустой элемент!");
     }
-    (this.element = element), this.registerEvents();
+    this.element = element, 
+    this.registerEvents();
   }
 
   /**
@@ -37,13 +38,21 @@ class TransactionsPage {
         this.removeAccount();
       });
 
-    [...this.element.querySelectorAll(".transaction__remove")].forEach((el) =>
-      el.addEventListener("click", (event) => {
-        let target = event.target.closest(".transaction__remove");
+    // [...this.element.querySelectorAll(".transaction__remove")].forEach((el) =>
+    //   el.addEventListener("click", (event) => {
+    //     let target = event.target.closest(".transaction__remove");
+    //     this.removeTransaction(target.dataset.id);
+    //   })
+    // );
+
+    this.element.addEventListener('click', (event) => {
+      let target = event.target.closest('.transaction__remove');
+      if (target) {
         this.removeTransaction(target.dataset.id);
-      })
-    );
+      }
+    })
   }
+
 
   /**
    * Удаляет счёт. Необходимо показать диаголовое окно (с помощью confirm())
@@ -197,6 +206,5 @@ class TransactionsPage {
       let itemHTML = this.getTransactionHTML(el);
       this.element.querySelector(".content").innerHTML += itemHTML;
     });
-    this.registerEvents();
   }
 }
