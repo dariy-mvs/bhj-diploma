@@ -110,7 +110,7 @@ class TransactionsPage {
       this.lastOptions = options;
       Account.get(options.account_id, (response, err) => {
         if (response.success) {
-          this.renderTitle(options.name);
+          this.renderTitle(response.data.name);
         }
       });
       Transaction.list(options, (response, err) => {

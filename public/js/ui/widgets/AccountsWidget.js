@@ -55,7 +55,6 @@ class AccountsWidget {
     let thisUser = User.current();
     if (thisUser) {
       Account.list(thisUser, (response, err) => {
-        console.log(response);
         if (response.success) {
           this.clear();
           response.data.forEach(el => this.renderItem(el))
@@ -83,7 +82,6 @@ class AccountsWidget {
    * */
   onSelectAccount( element ) {
     
-    //console.log(element);
     let accountsPanel = document.querySelector('.accounts-panel');
     if (accountsPanel.querySelector('.active')) {
       accountsPanel.querySelector('.active').classList.remove('active')
